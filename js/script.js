@@ -1,4 +1,5 @@
-
+import * as THREE from "./three.module.js";
+import { MapControls } from "./OrbitControls.js";
 var scene, camera, renderer;
 
 scene = new THREE.Scene();
@@ -13,5 +14,16 @@ var cube = new THREE.Mesh(
 );
 cube.position.z = -2;
 scene.add(cube);
+camera.position.z = 0.5;//truco estranio
 
-renderer.render(scene,camera);
+var controls = new MapControls(camera, renderer.domElement);
+controls.enableZoom = false;
+controls.panSpeed = 4;
+controls.keyPanSpeed = 20;
+
+var animate = function(){
+	requestAnimationFrame(animate);
+	renderer.render(scene, camera);
+}
+animate();
+
