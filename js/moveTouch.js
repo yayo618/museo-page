@@ -57,6 +57,7 @@ function mueve () {
     z += zspeed;
     camera.position.x = x/1000;
     camera.position.z = z/1000;
+	//camera.rotation.y = Math.PI/90;
 
 }
 function rotando (ang) {
