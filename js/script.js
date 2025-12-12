@@ -6,7 +6,7 @@
       var det = false;
       var angle = 0;
       var cosy, siny;
-      var x = 8000;
+      var x = 0;
       var z = 3000;
 //import * as THREE from "./three.module.js";
 //import { MapControls } from "./OrbitControls.js";
