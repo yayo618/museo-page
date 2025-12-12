@@ -18,6 +18,62 @@ renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
+var ptGeo = new THREE.PlaneGeometry(7.5,8.8,10,10);
+var txtPiso = new THREE.TextureLoader();
+var pisoTxt = new txtPiso.load("models/piso.png");
+var piso = new THREE.Mesh(
+    ptGeo,
+    new THREE.MeshBasicMaterial({color:0xffffff, map:pisoTxt}));
+piso.rotation.x = -Math.PI/2;
+piso.rotation.z = Math.PI/2;
+piso.position.y = -1.5;
+var txtTicho = new THREE.TextureLoader();
+var tichoTxt = new txtTicho.load("models/techo.png");
+var ticho = new THREE.Mesh(
+    ptGeo,
+    new THREE.MeshBasicMaterial({color:0xffffff, map:tichoTxt}));
+ticho.rotation.x = Math.PI/2;
+ticho.rotation.z = Math.PI/2;
+ticho.position.y = -1.5+2.25;
+
+var paGeo = new THREE.PlaneGeometry(8.8, 2.25);
+var txtPared = new THREE.TextureLoader();
+var paredTxt = new txtPared.load("models/pared2.png");
+var paMat = new THREE.MeshBasicMaterial({color:0xffffff, map:paredTxt});
+
+var pared1 = new THREE.Mesh(paGeo, paMat);
+pared1.position.set(0, -0.375, -3.75);
+var pared2 = new THREE.Mesh(paGeo, paMat);
+pared2.position.set(0, -0.375, 3.75);
+pared2.rotation.y = Math.PI;
+
+var pbGeo = new THREE.PlaneGeometry(7.5, 2.25);
+var txtParedb = new THREE.TextureLoader();
+var paredbTxt = new txtParedb.load("models/pared2.png");
+var pbMat = new THREE.MeshBasicMaterial({color:0xffffff, map:paredbTxt});
+
+var pared3 = new THREE.Mesh(pbGeo, pbMat);
+pared3.position.set(4.4, -0.375, 0);
+pared3.rotation.y = -Math.PI/2;
+var pared4 = new THREE.Mesh(pbGeo, pbMat);
+pared4.position.set(-4.4, -0.375, 0);
+pared4.rotation.y = Math.PI/2;
+scene.add(piso, ticho, pared1, pared2, pared3, pared4);
+//cuadro1
+var txt1 = new THREE.TextureLoader().load("cuadros/c1.jpg");
+var cdr1 = new THREE.Mesh(
+    new THREE.PlaneGeometry(1.4,0.88),
+    new THREE.MeshBasicMaterial({color:0xffffff,map:txt1})
+);
+//borde cuadro 1
+var cdrB1 = new THREE.Mesh(
+    new THREE.BoxGeometry(1.4,0.88,0.05,0),
+    new THREE.MeshBasicMaterial({color:0x46284B})
+);
+cdr1.position.set(0,0,-3.7);
+cdrB1.position.set(0,0,-3.73);
+scene.add(cdr1,cdrB1);
+
 var cube = new THREE.Mesh(
 	new THREE.BoxGeometry(1,1,1),
 	new THREE.MeshPhongMaterial({color:0xffffff})
@@ -42,17 +98,18 @@ controls.keyPanSpeed = 20;
 */
       var borders = [];
       for (var i = 0; i < 9; i++) {
-	  borders.push({x:-10000, z:-5000+(i*1000), w:1000, h:1000});
+	  borders.push({x:-9000,          z:-5000+(i*1000), w:1000, h:1000});
       }
       for (var i = 0; i < 19; i++) {
-	  borders.push({x:-9000+(i*1000), z:5000, w:1000, h:1000});
+	  borders.push({x:-9000+(i*1000), z:5000,           w:1000, h:1000});
       }
       for (var i = 0; i < 19; i++) {
-	  borders.push({x:-9000+(i*1000), z:-5000, w:1000, h:1000});
+	  borders.push({x:-9000+(i*1000), z:-5000,          w:1000, h:1000});
       }
       for (var i = 0; i < 9; i++) {
-	  borders.push({x:10000, z:-5000+(i*1000), w:1000, h:1000});
+	  borders.push({x:9000,           z:-5000+(i*1000), w:1000, h:1000});
       }
+//for (let i = 0; i< borders.length; i++) {}
 	  
 ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
 scene.add(ambientLight);
@@ -139,7 +196,31 @@ ranaLoader.load("models/rana.mtl", function(materials){
 		mesh.rotation.y = -Math.PI/4;
 	});
 });
-   
+/*
+var paredLoader = new THREE.MTLLoader();
+paredLoader.load("models/paredes.mtl", function(materials){
+	materials.preload();
+	var objLoader = new THREE.OBJLoader();
+	objLoader.setMaterials(materials);
+		
+	objLoader.load("models/paredes.obj", function(mesh){
+		var texture = new THREE.TextureLoader().load('models/bg3.png');
+		mesh.traverse(function(node){
+			if( node instanceof THREE.Mesh ){
+				node.material.map = texture;
+				node.castShadow = true;
+				node.receiveShadow = true;
+			}
+		});
+		
+		
+		mesh.position.set(0,-1.5,0);
+		//mesh.scale.set(0.7,0.7,0.7);
+		//mesh.rotation.y = -Math.PI/4;
+		scene.add(mesh);
+	});
+});
+ */  
 
 var animate = function(){
 	requestAnimationFrame(animate);
