@@ -36,26 +36,28 @@ ticho.rotation.x = Math.PI/2;
 ticho.rotation.z = Math.PI/2;
 ticho.position.y = -1.5+2.25;
 
-var paGeo = new THREE.PlaneGeometry(8.8, 2.25);
+
 var txtPared = new THREE.TextureLoader();
-var paredTxt = new txtPared.load("models/pared2.png");
+var paredTxt = new txtPared.load("models/pared1.png");
 var paMat = new THREE.MeshBasicMaterial({color:0xffffff, map:paredTxt});
-
-var pared1 = new THREE.Mesh(paGeo, paMat);
-pared1.position.set(0, -0.375, -3.75);
-var pared2 = new THREE.Mesh(paGeo, paMat);
-pared2.position.set(0, -0.375, 3.75);
-pared2.rotation.y = Math.PI;
-
-var pbGeo = new THREE.PlaneGeometry(7.5, 2.25);
 var txtParedb = new THREE.TextureLoader();
 var paredbTxt = new txtParedb.load("models/pared2.png");
+paredbTxt.center = new THREE.Vector2(0.5,0.5);
+paredbTxt.rotation = Math.PI/2;
 var pbMat = new THREE.MeshBasicMaterial({color:0xffffff, map:paredbTxt});
 
+var paGeo = new THREE.PlaneGeometry(8.8, 2.25);
+var pbGeo = new THREE.PlaneGeometry(7.5, 2.25);
+
+var pared1 = new THREE.Mesh(paGeo, paMat);
+var pared2 = new THREE.Mesh(paGeo, paMat);
 var pared3 = new THREE.Mesh(pbGeo, pbMat);
+var pared4 = new THREE.Mesh(pbGeo, pbMat);
+pared1.position.set(0, -0.375, -3.75);
+pared2.position.set(0, -0.375, 3.75);
+pared2.rotation.y = Math.PI;
 pared3.position.set(4.4, -0.375, 0);
 pared3.rotation.y = -Math.PI/2;
-var pared4 = new THREE.Mesh(pbGeo, pbMat);
 pared4.position.set(-4.4, -0.375, 0);
 pared4.rotation.y = Math.PI/2;
 scene.add(piso, ticho, pared1, pared2, pared3, pared4);
@@ -108,7 +110,7 @@ zz = borders[0].z/1000;
 	paredH8.rotation.x += Math.PI/2;
 	paredH8.position.set(xx,-1,zz);
 	scene.add(paredH8);
-	  
+
 ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
 ambientLight.castShadow=true;
 scene.add(ambientLight);
@@ -126,20 +128,20 @@ scene.add( object );
 */
 const loader = new THREE.MTLLoader();
 loader.load("models/balsatop.mtl", function(materials){
-	
+
 	materials.preload();
 	var objLoader = new THREE.OBJLoader();
 	objLoader.setMaterials(materials);
-		
+
 	objLoader.load("models/balsatop.obj", function(mesh){
-		
+
 		mesh.traverse(function(node){
 			if( node instanceof THREE.Mesh ){
 				node.castShadow = true;
 				node.receiveShadow = true;
 			}
 		});
-		
+
 		scene.add(mesh);
 		//mesh.castShadow=true;
 		mesh.position.set(-0.07, -1.32, 0.09);
@@ -147,18 +149,18 @@ loader.load("models/balsatop.mtl", function(materials){
 		//mesh.rotation.y = -Math.PI/2;
 	});
 });
-	  
+
 const mtlLoader = new THREE.MTLLoader();
 mtlLoader.load("models/balsa79.mtl", function(materials){
-		
+
 	materials.preload();
 	var objLoader = new THREE.OBJLoader();
 	objLoader.setMaterials(materials);
-		
+
 	objLoader.load("models/balsa79.obj", function(mesh){
-		
+
 		var texture = new THREE.TextureLoader().load('models/bg.jpg');
-		
+
 		mesh.traverse(function(node){
 			if( node instanceof THREE.Mesh ){
 				node.material.map = texture;
@@ -167,31 +169,31 @@ mtlLoader.load("models/balsa79.mtl", function(materials){
 				//node.material.emmisive = (1,1,1);
 			}
 		});
-		
+
 		scene.add(mesh);
 		//mesh.castShadow=true;
 		mesh.position.set(-1, -0.5, 0);
 		mesh.scale.set(0.1,0.1,0.1);
 		//mesh.rotation.y = -Math.PI/4;
 	});
-		
+
 });
-	
+
 var ranaLoader = new THREE.MTLLoader();
 ranaLoader.load("models/rana.mtl", function(materials){
 	materials.preload();
 	var objLoader = new THREE.OBJLoader();
 	objLoader.setMaterials(materials);
-		
+
 	objLoader.load("models/rana.obj", function(mesh){
-		
+
 		mesh.traverse(function(node){
 			if( node instanceof THREE.Mesh ){
 				node.castShadow = true;
 				node.receiveShadow = true;
 			}
 		});
-		
+
 		scene.add(mesh);
 		mesh.position.set(0.3, -1.2, -0.5);
 		mesh.scale.set(0.7,0.7,0.7);
@@ -204,7 +206,7 @@ paredLoader.load("models/paredes.mtl", function(materials){
 	materials.preload();
 	var objLoader = new THREE.OBJLoader();
 	objLoader.setMaterials(materials);
-		
+
 	objLoader.load("models/paredes.obj", function(mesh){
 		var texture = new THREE.TextureLoader().load('models/bg3.png');
 		mesh.traverse(function(node){
@@ -214,15 +216,15 @@ paredLoader.load("models/paredes.mtl", function(materials){
 				node.receiveShadow = true;
 			}
 		});
-		
-		
+
+
 		mesh.position.set(0,-1.5,0);
 		//mesh.scale.set(0.7,0.7,0.7);
 		//mesh.rotation.y = -Math.PI/4;
 		scene.add(mesh);
 	});
 });
- */  
+ */
 
 var animate = function(){
 	requestAnimationFrame(animate);
@@ -230,4 +232,3 @@ var animate = function(){
 	mueve();
 }
 animate();
-
