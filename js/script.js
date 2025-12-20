@@ -71,20 +71,20 @@ var cdrB1 = new THREE.Mesh(
     new THREE.MeshBasicMaterial({color:0x46284B})
 );
 cdr1.position.set(0,0,-3.7);
-cdrB1.position.set(0,0,-3.73);
+cdrB1.position.set(0,0,-3.72);
 scene.add(cdr1,cdrB1);
 
-var cube = new THREE.Mesh(
-	new THREE.BoxGeometry(1,1,1),
-	new THREE.MeshPhongMaterial({color:0xffffff})
-);
+var geo = new THREE.BoxGeometry(1,1,1);
+var mat = new THREE.MeshStandardMaterial({color:0xffffff});
+var cube = new THREE.Mesh(geo, mat);
+//cube.castShadow=true;
+cube.receiveShadow=true;
 cube.position.y = -1;
 cube.position.x = -1;
 cube.scale.set(0.5,1,0.5);
-var cube2 = new THREE.Mesh(
-	new THREE.BoxGeometry(1,1,1),
-	new THREE.MeshPhongMaterial({color:0xffffff})
-);
+var cube2 = new THREE.Mesh(geo, mat);
+//cube2.castShadow=true;
+cube2.receiveShadow=true;
 cube2.position.y = -1;
 cube2.position.x = 1;
 cube2.scale.set(0.5,1,0.5);
@@ -111,15 +111,16 @@ controls.keyPanSpeed = 20;
       }
 //for (let i = 0; i< borders.length; i++) {}
 	  
-ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+ambientLight.castShadow=true;
 scene.add(ambientLight);
 
-	light = new THREE.PointLight(0xffffff, 0.8, 18);
-	light.position.set(-3,6,-3);
-	light.castShadow = true;
-	light.shadow.camera.near = 0.1;
-	light.shadow.camera.far = 25;
-	scene.add(light);
+light = new THREE.DirectionalLight(0xffffff, 0.8, 18);
+light.position.set(0,6,0);
+light.castShadow = true;
+light.shadow.camera.near = 0.1;
+light.shadow.camera.far = 25;
+scene.add(light);
 /*
 const loader = new FBXLoader();
 const object = await loader.loadAsync( 'models/balsatop.fbx' );
@@ -142,6 +143,7 @@ loader.load("models/balsatop.mtl", function(materials){
 		});
 		
 		scene.add(mesh);
+		//mesh.castShadow=true;
 		mesh.position.set(-0.07, -1.32, 0.09);
 		mesh.scale.set(0.8,0.8,0.8);
 		//mesh.rotation.y = -Math.PI/2;
@@ -158,16 +160,18 @@ mtlLoader.load("models/balsa79.mtl", function(materials){
 	objLoader.load("models/balsa79.obj", function(mesh){
 		
 		var texture = new THREE.TextureLoader().load('models/bg.jpg');
+		
 		mesh.traverse(function(node){
 			if( node instanceof THREE.Mesh ){
 				node.material.map = texture;
-				//node.castShadow = true;
-				//node.receiveShadow = true;
+				node.castShadow = true;
+				node.receiveShadow = true;
 				//node.material.emmisive = (1,1,1);
 			}
 		});
 		
 		scene.add(mesh);
+		//mesh.castShadow=true;
 		mesh.position.set(-1, -0.5, 0);
 		mesh.scale.set(0.1,0.1,0.1);
 		//mesh.rotation.y = -Math.PI/4;
