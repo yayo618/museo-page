@@ -59,20 +59,7 @@ var pared4 = new THREE.Mesh(pbGeo, pbMat);
 pared4.position.set(-4.4, -0.375, 0);
 pared4.rotation.y = Math.PI/2;
 scene.add(piso, ticho, pared1, pared2, pared3, pared4);
-//cuadro1
-var txt1 = new THREE.TextureLoader().load("cuadros/c1.jpg");
-var cdr1 = new THREE.Mesh(
-    new THREE.PlaneGeometry(1.4,0.88),
-    new THREE.MeshBasicMaterial({color:0xffffff,map:txt1})
-);
-//borde cuadro 1
-var cdrB1 = new THREE.Mesh(
-    new THREE.BoxGeometry(1.4,0.88,0.05,0),
-    new THREE.MeshBasicMaterial({color:0x46284B})
-);
-cdr1.position.set(0,0,-3.7);
-cdrB1.position.set(0,0,-3.72);
-scene.add(cdr1,cdrB1);
+//aqui estaban cuadro
 
 var geo = new THREE.BoxGeometry(1,1,1);
 var mat = new THREE.MeshStandardMaterial({color:0xffffff});
