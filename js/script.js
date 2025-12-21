@@ -17,6 +17,14 @@ camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight);
 renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
+var wiw = window.innerWidth/64;
+var wih = window.innerHeight/64;
+console.log(wiw,wih);
+var newcamera = new THREE.OrthographicCamera(wiw,-wiw,wih,-wih,1,10);
+newcamera.position.y = 5;
+newcamera.rotation.x = -Math.PI/2;
+//var helper = new THREE.CameraHelper(newcamera);
+//scene.add(helper);
 
 var ptGeo = new THREE.PlaneGeometry(7.5,8.8,10,10);
 var txtPiso = new THREE.TextureLoader();
@@ -230,7 +238,7 @@ paredLoader.load("models/paredes.mtl", function(materials){
 
 var animate = function(){
 	requestAnimationFrame(animate);
-	renderer.render(scene, camera);
+	renderer.render(scene, newcamera);
 	mueve();
 }
 animate();
