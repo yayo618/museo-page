@@ -98,18 +98,20 @@ controls.keyPanSpeed = 20;
       for (var i = 0; i < 9; i++) {
 	  borders.push({x:9000,           z:-5000+(i*1000), w:1000, h:1000});
       }
-//for (let i = 0; i< borders.length; i++) {console.log(borders);}
 console.log(borders);
 console.log(borders[0].x,borders[0].z);
-xx = borders[0].x/1000;
-zz = borders[0].z/1000;
 	//collision helper
-	var paredH8 = new THREE.Mesh(
-                new THREE.PlaneGeometry(0,0),
-                new THREE.MeshBasicMaterial({color:0xa00000,wireframe:true}));
-	paredH8.rotation.x += Math.PI/2;
-	paredH8.position.set(xx,-1,zz);
-	scene.add(paredH8);
+var wireGeo = new THREE.PlaneGeometry(0,0);
+var wireMat = new THREE.MeshBasicMaterial({color:0xa00000,wireframe:true});
+
+for (let i = 0; i< borders.length; i++) {//console.log(borders);}
+xx = borders[i].x/1000;
+zz = borders[i].z/1000;
+	var wireC = new THREE.Mesh(wireGeo,wireMat);
+	wireC.rotation.x += Math.PI/2;
+	wireC.position.set(xx,-1,zz);
+	scene.add(wireC);
+}
 
 ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
 ambientLight.castShadow=true;
