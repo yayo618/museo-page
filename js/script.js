@@ -100,17 +100,17 @@ controls.panSpeed = 4;
 controls.keyPanSpeed = 20;
 */
       var borders = [];
-      for (var i = 0; i < 9; i++) {
-	  borders.push({x:-9000,          z:-5000+(i*1000), w:1000, h:1000});
+      for (var i = 0; i < 8; i++) { //der
+	  borders.push({x:-5000,          z:-3500+(i*1000), w:1000, h:1000});
       }
-      for (var i = 0; i < 19; i++) {
-	  borders.push({x:-9000+(i*1000), z:5000,           w:1000, h:1000});
+      for (var i = 0; i < 9; i++) { //abajo
+	  borders.push({x:-4000+(i*1000), z:4300,           w:1000, h:1000});
       }
-      for (var i = 0; i < 19; i++) {
-	  borders.push({x:-9000+(i*1000), z:-5000,          w:1000, h:1000});
+      for (var i = 0; i < 9; i++) { //arriba
+	  borders.push({x:-4000+(i*1000), z:-4300,          w:1000, h:1000});
       }
-      for (var i = 0; i < 9; i++) {
-	  borders.push({x:9000,           z:-5000+(i*1000), w:1000, h:1000});
+      for (var i = 0; i < 8; i++) { //iz
+	  borders.push({x:5000,           z:-3500+(i*1000), w:1000, h:1000});
       }
 console.log(borders);
 console.log(borders[0].x,borders[0].z);
@@ -118,7 +118,7 @@ console.log(borders[0].x,borders[0].z);
 var wireGeo = new THREE.PlaneGeometry(0,0);
 var wireMat = new THREE.MeshBasicMaterial({color:0xa00000,wireframe:true});
 
-for (let i = 0; i< borders.length; i++) {//console.log(borders);}
+for (let i = 0; i< borders.length; i++) {
 xx = borders[i].x/1000;
 zz = borders[i].z/1000;
 	var wireC = new THREE.Mesh(wireGeo,wireMat);
