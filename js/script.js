@@ -17,8 +17,9 @@ camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight);
 renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
-var wiw = window.innerWidth/64;
-var wih = window.innerHeight/64;
+//orthogo camera
+var wiw = window.innerWidth/128;
+var wih = window.innerHeight/128;
 console.log(wiw,wih);
 var newcamera = new THREE.OrthographicCamera(wiw,-wiw,wih,-wih,1,40);
 newcamera.position.y = 5;
