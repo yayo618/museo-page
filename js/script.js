@@ -20,11 +20,16 @@ document.body.appendChild(renderer.domElement);
 var wiw = window.innerWidth/64;
 var wih = window.innerHeight/64;
 console.log(wiw,wih);
-var newcamera = new THREE.OrthographicCamera(wiw,-wiw,wih,-wih,1,10);
+var newcamera = new THREE.OrthographicCamera(wiw,-wiw,wih,-wih,1,40);
 newcamera.position.y = 5;
 newcamera.rotation.x = -Math.PI/2;
-//var helper = new THREE.CameraHelper(newcamera);
-//scene.add(helper);
+var helper = new THREE.Mesh(
+	new THREE.PlaneGeometry(0,0),
+	new THREE.MeshBasicMaterial({color:0x00ff00,wireframe:true})
+);
+helper.rotation.x += Math.PI/2;
+//helper.rotation.z = -Math.PI/2;
+scene.add(helper);
 
 var ptGeo = new THREE.PlaneGeometry(7.5,8.8,10,10);
 var txtPiso = new THREE.TextureLoader();
@@ -32,7 +37,7 @@ var pisoTxt = new txtPiso.load("models/piso.png");
 var piso = new THREE.Mesh(
     ptGeo,
     new THREE.MeshBasicMaterial({color:0xffffff, map:pisoTxt}));
-piso.rotation.x = -Math.PI/2;
+piso.rotation.x = Math.PI/2;//camera orto no lo ve
 piso.rotation.z = Math.PI/2;
 piso.position.y = -1.5;
 var txtTicho = new THREE.TextureLoader();
@@ -68,7 +73,8 @@ pared3.position.set(4.4, -0.375, 0);
 pared3.rotation.y = -Math.PI/2;
 pared4.position.set(-4.4, -0.375, 0);
 pared4.rotation.y = Math.PI/2;
-scene.add(piso, ticho, pared1, pared2, pared3, pared4);
+//scene.add(piso, ticho, pared1, pared2, pared3, pared4);
+scene.add(piso, pared1, pared2, pared3, pared4);
 //aqui estaban cuadro
 
 var geo = new THREE.BoxGeometry(1,1,1);

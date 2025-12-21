@@ -58,10 +58,13 @@ function mueve () {
     camera.position.x = x/1000;
     camera.position.z = z/1000;
 	//camera.rotation.y = Math.PI/90;
+    helper.position.x = x/1000;
+    helper.position.z = z/1000;
 
 }
 function rotando (ang) {
     camera.rotation.y = ang * Math.PI/180;
+    helper.rotation.z = ang * Math.PI/180;
 }
 
 function checkIn (r1, r2) {
